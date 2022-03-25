@@ -1,14 +1,17 @@
 <template>
   <h1>{{ secondes }}</h1>
+  <h1>{{ totalIdleTime }}</h1>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
 const secondes = ref(0);
+const totalIdleTime = ref(0);
 
 setInterval(() => {
   secondes.value++;
+  totalIdleTime.value += secondes.value;
 }, 1000);
 
 function mouseMove(event: MouseEvent) {
@@ -16,7 +19,7 @@ function mouseMove(event: MouseEvent) {
 }
 
 onMounted(() => window.addEventListener('mousemove', mouseMove));
-onUnMounted(() => window.removeEventListener('mousemove', mouseMove));
+onUnmounted(() => window.removeEventListener('mousemove', mouseMove));
 </script>
 
 <style lang="scss">
